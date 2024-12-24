@@ -1,25 +1,49 @@
-const ILLEGAL = "ILLEGAL"
-const EOF = "EOF"
-// Identifiers
-const IDENT = "IDENT"
-// Delimiters 
-const COMMA = ","
-const LBRACE = "{"
-const RBRACE = "}"
-const LSQBRACKET = "["
-const RSQBRACKET = "]"
+/**
+ * @typedef {Object} tokenType
+ * @property {string} ILLEGAL
+ * @property {string} EOF
+ * @property {string} IDENT
+ * @property {string} COMMA
+ * @property {string} LBRACE
+ * @property {string} RBRACE
+ * @property {string} LSQBRACKET
+ * @property {string} RSQBRACKET
+ */
+
+/**
+ * @type {tokenType}
+ */
+export const tokenType = {
+    ILLEGAL: 'ILLEGAL',
+    EOF: 'EOF',
+    // Identifiers
+    IDENT: 'IDENT',
+    // Delimiters
+    COMMA: ',',
+    LBRACE: '{',
+    RBRACE: '}',
+    LSQBRACKET: '[',
+    RSQBRACKET: ']',
+};
+
+/**
+ * @typedef {Object} token
+ * @property {tokenType} type
+ * @property {string} literal
+ */
 
 /**
  * Token class represents a single token of JSON
-**/
-class Token {
+ * @type {token}
+ **/
+export class Token {
     /**
      * Creates a tokent
-     * @param {string} tokenType
+     * @param {tokenType} type
      * @param {string} literal
      **/
-    constructor(tokenType, literal) {
-        this.tokenType = tokenType
-        this.literal = literal
+    constructor(type, literal) {
+        this.type = type;
+        this.literal = literal;
     }
 }
