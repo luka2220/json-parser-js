@@ -75,6 +75,7 @@ export class Lexer {
         return new Token(tokenType, ch);
     }
 
+    /** #skipWhiteSpace advances the read position if the current chat is ' ', '\t', '\n', '\r' */
     #skipWhitespace() {
         while (this.ch === ' ' || this.ch === '\t' || this.ch === '\n' || this.ch === '\r') {
             this.#readChar();
