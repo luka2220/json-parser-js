@@ -103,4 +103,13 @@ export class Lexer {
 
         return result;
     }
+
+    /** #readIllgeal creates and illegal token as a string 
+     *  @returns {string}
+     */
+    #readIllegal() {
+        let result = "";
+
+    }
+
 }
