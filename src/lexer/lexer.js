@@ -45,6 +45,8 @@ export class Lexer {
                 token = this.#newToken(tokenType.COLON, this.ch);
                 break
             case '"':
+                let str = this.#readString();
+                token = this.#newToken(tokenType.STRING, str);
                 break;
             case 0:
                 token = this.#newToken(tokenType.EOF, '');
@@ -87,8 +89,18 @@ export class Lexer {
         }
     }
 
-    /** #readString creates a string token by read all content from "..." */
+    /** #readString creates a string token by read all content from "..." 
+     * @returns {string}
+     */
     #readString() {
+        this.#readChar()
+        let result = "";
 
+        while (this.ch !== '"') {
+            result += this.ch
+            this.#readChar();
+        }
+
+        return result;
     }
 }
