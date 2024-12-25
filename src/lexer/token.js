@@ -3,11 +3,13 @@
  * @property {string} ILLEGAL
  * @property {string} EOF
  * @property {string} IDENT
+ * @property {string} COLON
  * @property {string} COMMA
  * @property {string} LBRACE
  * @property {string} RBRACE
  * @property {string} LSQBRACKET
  * @property {string} RSQBRACKET
+ * @property {string} STRING
  */
 
 /**
@@ -19,11 +21,13 @@ export const tokenType = {
     // Identifiers
     IDENT: 'IDENT',
     // Delimiters
+    COLON: ':',
     COMMA: ',',
     LBRACE: '{',
     RBRACE: '}',
     LSQBRACKET: '[',
     RSQBRACKET: ']',
+    STRING: '""',
 };
 
 /**

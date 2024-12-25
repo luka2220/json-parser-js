@@ -41,6 +41,13 @@ export class Lexer {
             case ']':
                 token = this.#newToken(tokenType.RSQBRACKET, this.ch);
                 break;
+            case ':':
+                token = this.#newToken(tokenType.COLON, this.ch);
+                break
+            case '"':
+                let str = this.#readString();
+                token = this.#newToken(tokenType.STRING, str);
+                break;
             case 0:
                 token = this.#newToken(tokenType.EOF, '');
                 break;
@@ -75,9 +82,25 @@ export class Lexer {
         return new Token(tokenType, ch);
     }
 
+    /** #skipWhiteSpace advances the read position if the current chat is ' ', '\t', '\n', '\r' */
     #skipWhitespace() {
         while (this.ch === ' ' || this.ch === '\t' || this.ch === '\n' || this.ch === '\r') {
             this.#readChar();
         }
+    }
+
+    /** #readString creates a string token by read all content from "..." 
+     * @returns {string}
+     */
+    #readString() {
+        this.#readChar()
+        let result = "";
+
+        while (this.ch !== '"') {
+            result += this.ch
+            this.#readChar();
+        }
+
+        return result;
     }
 }
