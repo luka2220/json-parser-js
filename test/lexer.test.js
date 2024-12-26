@@ -29,7 +29,6 @@ function debug(expected, got) {
 
 test('test lexer with step1/valid.json', async () => {
     const input = await openFile('./test/data/step1/valid.json');
-    console.log(input);
 
     const expected = [
         { expectedType: tokenType.LBRACE, expectedLiteral: '{' },
@@ -49,7 +48,6 @@ test('test lexer with step1/valid.json', async () => {
 
 test('test lexer with step1/invalid.json', async () => {
     const input = await openFile('./test/data/step1/invalid.json');
-    console.log(input);
 
     const expected = [
         { expectedType: tokenType.EOF, expectedLiteral: "" },
@@ -67,7 +65,6 @@ test('test lexer with step1/invalid.json', async () => {
 
 test('test lexer with step2/valid.json', async () => {
     const input = await openFile('./test/data/step2/valid.json');
-    console.log(input);
 
     const expected = [
         { expectedType: tokenType.LBRACE, expectedLiteral: "{" },
@@ -91,7 +88,6 @@ test('test lexer with step2/valid.json', async () => {
 
 test('test lexer with step2/valid2.json', async () => {
     const input = await openFile('./test/data/step2/valid2.json');
-    console.log(input);
 
     const expected = [
         { expectedType: tokenType.LBRACE, expectedLiteral: "{" },
@@ -118,7 +114,6 @@ test('test lexer with step2/valid2.json', async () => {
 
 test('test lexer with step2/invalid.json', async () => {
     const input = await openFile('./test/data/step2/invalid.json');
-    console.log(input);
 
     const expected = [
         { expectedType: tokenType.LBRACE, expectedLiteral: "{" },
@@ -142,7 +137,6 @@ test('test lexer with step2/invalid.json', async () => {
 
 test('test lexer with step2/invalid2.json', async () => {
     const input = await openFile('./test/data/step2/invalid2.json');
-    console.log(input);
 
     const expected = [
         { expectedType: tokenType.LBRACE, expectedLiteral: "{" },
@@ -164,10 +158,6 @@ test('test lexer with step2/invalid2.json', async () => {
 
     expected.forEach(({ expectedType, expectedLiteral }) => {
         const tok = l.nextToken();
-
-        debug(expectedType, tok.type)
-        debug(expectedLiteral, tok.literal)
-
 
         expect(tok.type).toBe(expectedType);
         expect(tok.literal).toBe(expectedLiteral);
