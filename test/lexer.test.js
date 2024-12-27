@@ -164,8 +164,8 @@ test('test lexer with step2/invalid2.json', async () => {
     })
 })
 
-test('test lexer with step3/valid.json', async () => {
-    const input = await openFile('./test/data/step3/valid.json');
+test('test lexer with bool/valid.json', async () => {
+    const input = await openFile('./test/data/bool/valid.json');
 
     const expected = [
         { expectedType: tokenType.LBRACE, expectedLiteral: "{" },
@@ -176,18 +176,7 @@ test('test lexer with step3/valid.json', async () => {
         { expectedType: tokenType.STRING, expectedLiteral: "key2" },
         { expectedType: tokenType.COLON, expectedLiteral: ":" },
         { expectedType: tokenType.BOOLEAN, expectedLiteral: "false" },
-        { expectedType: tokenType.COMMA, expectedLiteral: "," },
-        { expectedType: tokenType.STRING, expectedLiteral: "key3" },
-        { expectedType: tokenType.COLON, expectedLiteral: ":" },
-        { expectedType: tokenType.NULL, expectedLiteral: "null" },
-        { expectedType: tokenType.COMMA, expectedLiteral: "," },
-        { expectedType: tokenType.STRING, expectedLiteral: "key4" },
-        { expectedType: tokenType.COLON, expectedLiteral: ":" },
-        { expectedType: tokenType.STRING, expectedLiteral: "value" },
-        { expectedType: tokenType.COMMA, expectedLiteral: "," },
-        { expectedType: tokenType.STRING, expectedLiteral: "key5" },
-        { expectedType: tokenType.COLON, expectedLiteral: ":" },
-        { expectedType: tokenType.NUMBER, expectedLiteral: "101" },
+        { expectedType: tokenType.RBRACE, expectedLiteral: "}" },
         { expectedType: tokenType.EOF, expectedLiteral: "" },
     ]
 
@@ -201,8 +190,8 @@ test('test lexer with step3/valid.json', async () => {
     })
 })
 
-test('test lexer with step3/invalid.json', async () => {
-    const input = await openFile('./test/data/step3/invalid.json');
+test('test lexer with bool/invalid.json', async () => {
+    const input = await openFile('./test/data/bool/invalid.json');
 
     const expected = [
         { expectedType: tokenType.LBRACE, expectedLiteral: "{" },
@@ -217,18 +206,7 @@ test('test lexer with step3/invalid.json', async () => {
         { expectedType: tokenType.ILLEGAL, expectedLiteral: "l" },
         { expectedType: tokenType.ILLEGAL, expectedLiteral: "s" },
         { expectedType: tokenType.ILLEGAL, expectedLiteral: "e" },
-        { expectedType: tokenType.COMMA, expectedLiteral: "," },
-        { expectedType: tokenType.STRING, expectedLiteral: "key3" },
-        { expectedType: tokenType.COLON, expectedLiteral: ":" },
-        { expectedType: tokenType.NULL, expectedLiteral: "null" },
-        { expectedType: tokenType.COMMA, expectedLiteral: "," },
-        { expectedType: tokenType.STRING, expectedLiteral: "key4" },
-        { expectedType: tokenType.COLON, expectedLiteral: ":" },
-        { expectedType: tokenType.STRING, expectedLiteral: "value" },
-        { expectedType: tokenType.COMMA, expectedLiteral: "," },
-        { expectedType: tokenType.STRING, expectedLiteral: "key5" },
-        { expectedType: tokenType.COLON, expectedLiteral: ":" },
-        { expectedType: tokenType.NUMBER, expectedLiteral: "101" },
+        { expectedType: tokenType.RBRACE, expectedLiteral: "}" },
         { expectedType: tokenType.EOF, expectedLiteral: "" },
     ]
 
