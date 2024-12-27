@@ -163,3 +163,81 @@ test('test lexer with step2/invalid2.json', async () => {
         expect(tok.literal).toBe(expectedLiteral);
     })
 })
+
+test('test lexer with step3/valid.json', async () => {
+    const input = await openFile('./test/data/step3/valid.json');
+
+    const expected = [
+        { expectedType: tokenType.LBRACE, expectedLiteral: "{" },
+        { expectedType: tokenType.STRING, expectedLiteral: "key1" },
+        { expectedType: tokenType.COLON, expectedLiteral: ":" },
+        { expectedType: tokenType.BOOLEAN, expectedLiteral: "true" },
+        { expectedType: tokenType.COMMA, expectedLiteral: "," },
+        { expectedType: tokenType.STRING, expectedLiteral: "key2" },
+        { expectedType: tokenType.COLON, expectedLiteral: ":" },
+        { expectedType: tokenType.BOOLEAN, expectedLiteral: "false" },
+        { expectedType: tokenType.COMMA, expectedLiteral: "," },
+        { expectedType: tokenType.STRING, expectedLiteral: "key3" },
+        { expectedType: tokenType.COLON, expectedLiteral: ":" },
+        { expectedType: tokenType.NULL, expectedLiteral: "null" },
+        { expectedType: tokenType.COMMA, expectedLiteral: "," },
+        { expectedType: tokenType.STRING, expectedLiteral: "key4" },
+        { expectedType: tokenType.COLON, expectedLiteral: ":" },
+        { expectedType: tokenType.STRING, expectedLiteral: "value" },
+        { expectedType: tokenType.COMMA, expectedLiteral: "," },
+        { expectedType: tokenType.STRING, expectedLiteral: "key5" },
+        { expectedType: tokenType.COLON, expectedLiteral: ":" },
+        { expectedType: tokenType.NUMBER, expectedLiteral: "101" },
+        { expectedType: tokenType.EOF, expectedLiteral: "" },
+    ]
+
+    const l = new Lexer(input);
+
+    expected.forEach(({ expectedType, expectedLiteral }) => {
+        const tok = l.nextToken();
+
+        expect(tok.type).toBe(expectedType);
+        expect(tok.literal).toBe(expectedLiteral);
+    })
+})
+
+test('test lexer with step3/invalid.json', async () => {
+    const input = await openFile('./test/data/step3/invalid.json');
+
+    const expected = [
+        { expectedType: tokenType.LBRACE, expectedLiteral: "{" },
+        { expectedType: tokenType.STRING, expectedLiteral: "key1" },
+        { expectedType: tokenType.COLON, expectedLiteral: ":" },
+        { expectedType: tokenType.BOOLEAN, expectedLiteral: "true" },
+        { expectedType: tokenType.COMMA, expectedLiteral: "," },
+        { expectedType: tokenType.STRING, expectedLiteral: "key2" },
+        { expectedType: tokenType.COLON, expectedLiteral: ":" },
+        { expectedType: tokenType.ILLEGAL, expectedLiteral: "F" },
+        { expectedType: tokenType.ILLEGAL, expectedLiteral: "a" },
+        { expectedType: tokenType.ILLEGAL, expectedLiteral: "l" },
+        { expectedType: tokenType.ILLEGAL, expectedLiteral: "s" },
+        { expectedType: tokenType.ILLEGAL, expectedLiteral: "e" },
+        { expectedType: tokenType.COMMA, expectedLiteral: "," },
+        { expectedType: tokenType.STRING, expectedLiteral: "key3" },
+        { expectedType: tokenType.COLON, expectedLiteral: ":" },
+        { expectedType: tokenType.NULL, expectedLiteral: "null" },
+        { expectedType: tokenType.COMMA, expectedLiteral: "," },
+        { expectedType: tokenType.STRING, expectedLiteral: "key4" },
+        { expectedType: tokenType.COLON, expectedLiteral: ":" },
+        { expectedType: tokenType.STRING, expectedLiteral: "value" },
+        { expectedType: tokenType.COMMA, expectedLiteral: "," },
+        { expectedType: tokenType.STRING, expectedLiteral: "key5" },
+        { expectedType: tokenType.COLON, expectedLiteral: ":" },
+        { expectedType: tokenType.NUMBER, expectedLiteral: "101" },
+        { expectedType: tokenType.EOF, expectedLiteral: "" },
+    ]
+
+    const l = new Lexer(input);
+
+    expected.forEach(({ expectedType, expectedLiteral }) => {
+        const tok = l.nextToken();
+
+        expect(tok.type).toBe(expectedType);
+        expect(tok.literal).toBe(expectedLiteral);
+    })
+})
