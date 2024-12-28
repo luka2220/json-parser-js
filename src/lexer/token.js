@@ -10,9 +10,9 @@
  * @property {string} LSQBRACKET
  * @property {string} RSQBRACKET
  * @property {string} STRING
- * @property {string} BOOLEAN 
- * @property {string} NULL 
- * @property {string} NUMBER 
+ * @property {string} BOOLEAN
+ * @property {string} NULL
+ * @property {string} NUMBER
  */
 
 /**
