@@ -23,7 +23,7 @@ export class Lexer {
     nextToken() {
         let token;
 
-        this.#skipWhitespace()
+        this.#skipWhitespace();
 
         switch (this.ch) {
             case ',':
@@ -43,11 +43,18 @@ export class Lexer {
                 break;
             case ':':
                 token = this.#newToken(tokenType.COLON, this.ch);
-                break
+                break;
             case '"':
                 let str = this.#readString();
                 token = this.#newToken(tokenType.STRING, str);
                 break;
+            case 't':
+            case 'f':
+                const result = this.#readBool();
+
+                if (result !== null) {
+                    return this.#newToken(tokenType.BOOLEAN, result);
+                }
             case 0:
                 token = this.#newToken(tokenType.EOF, '');
                 break;
@@ -84,23 +91,62 @@ export class Lexer {
 
     /** #skipWhiteSpace advances the read position if the current chat is ' ', '\t', '\n', '\r' */
     #skipWhitespace() {
-        while (this.ch === ' ' || this.ch === '\t' || this.ch === '\n' || this.ch === '\r') {
+        while (
+            this.ch === ' ' ||
+            this.ch === '\t' ||
+            this.ch === '\n' ||
+            this.ch === '\r'
+        ) {
             this.#readChar();
         }
     }
 
-    /** #readString creates a string token by read all content from "..." 
+    /** #readString creates a string token by read all content from "..."
      * @returns {string}
      */
     #readString() {
-        this.#readChar()
-        let result = "";
+        this.#readChar();
+        let result = '';
 
         while (this.ch !== '"') {
-            result += this.ch
+            result += this.ch;
             this.#readChar();
         }
 
         return result;
+    }
+
+
+    /** #readBool creates a boolean token
+     * @returns {string | null}
+     */
+    #readBool() {
+        if (this.ch === 't') {
+            let i = 0;
+            const t = "true";
+
+            while (this.ch === t[i] && i < t.length) {
+                i += 1;
+                this.#readChar()
+            }
+
+            if (t.length === i) {
+                return "true"
+            }
+        } else if (this.ch === 'f') {
+            let i = 0;
+            const f = "false";
+
+            while (this.ch == f[i] && i < f.length) {
+                i += 1;
+                this.#readChar();
+            }
+
+            if (f.length === i) {
+                return "false"
+            }
+        }
+
+        return null;
     }
 }

@@ -10,6 +10,9 @@
  * @property {string} LSQBRACKET
  * @property {string} RSQBRACKET
  * @property {string} STRING
+ * @property {string} BOOLEAN
+ * @property {string} NULL
+ * @property {string} NUMBER
  */
 
 /**
@@ -27,7 +30,11 @@ export const tokenType = {
     RBRACE: '}',
     LSQBRACKET: '[',
     RSQBRACKET: ']',
+    // Data Types
     STRING: '""',
+    BOOLEAN: 'BOOLEAN',
+    NULL: 'NULL',
+    NUMBER: 'NUMBER',
 };
 
 /**
