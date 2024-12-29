@@ -216,3 +216,83 @@ test('test lexer with bool/invalid.json', async () => {
         expect(tok.literal).toBe(expectedLiteral);
     });
 });
+
+test("Test number whole valid ./data/num/valid1.json", async () => {
+    const input = await openFile('./test/data/number/valid1.json');
+
+    const expected = [
+        { expectedType: tokenType.LBRACE, expectedLiteral: '{' },
+        { expectedType: tokenType.STRING, expectedLiteral: 'key1' },
+        { expectedType: tokenType.COLON, expectedLiteral: ':' },
+        { expectedType: tokenType.NUMBER, expectedLiteral: '12000' },
+        { expectedType: tokenType.COMMA, expectedLiteral: ',' },
+        { expectedType: tokenType.STRING, expectedLiteral: 'key2' },
+        { expectedType: tokenType.COLON, expectedLiteral: ':' },
+        { expectedType: tokenType.NUMBER, expectedLiteral: '-9120' },
+        { expectedType: tokenType.STRING, expectedLiteral: 'key3' },
+        { expectedType: tokenType.COLON, expectedLiteral: ':' },
+        { expectedType: tokenType.NUMBER, expectedLiteral: '0' },
+        { expectedType: tokenType.RBRACE, expectedLiteral: '}' },
+        { expectedType: tokenType.EOF, expectedLiteral: '' },
+    ];
+
+    const l = new Lexer(input);
+
+    expected.forEach(({ expectedType, expectedLiteral }) => {
+        const tok = l.nextToken();
+
+        expect(tok.type).toBe(expectedType);
+        expect(tok.literal).toBe(expectedLiteral);
+    })
+});
+
+test("Test number decimal valid ./data/number/valid2.json", async () => {
+    const input = await openFile('./test/data/number/valid2.json');
+
+    const expected = [
+        { expectedType: tokenType.LBRACE, expectedLiteral: '{' },
+        { expectedType: tokenType.STRING, expectedLiteral: 'key1' },
+        { expectedType: tokenType.COLON, expectedLiteral: ':' },
+        { expectedType: tokenType.NUMBER, expectedLiteral: '0.999999' },
+        { expectedType: tokenType.COMMA, expectedLiteral: ',' },
+        { expectedType: tokenType.STRING, expectedLiteral: 'key2' },
+        { expectedType: tokenType.COLON, expectedLiteral: ':' },
+        { expectedType: tokenType.NUMBER, expectedLiteral: '-91.20' },
+        { expectedType: tokenType.STRING, expectedLiteral: 'key3' },
+        { expectedType: tokenType.COLON, expectedLiteral: ':' },
+        { expectedType: tokenType.NUMBER, expectedLiteral: '63.102011' },
+        { expectedType: tokenType.RBRACE, expectedLiteral: '}' },
+        { expectedType: tokenType.EOF, expectedLiteral: '' },
+    ];
+
+    const l = new Lexer(input);
+
+    expected.forEach(({ expectedType, expectedLiteral }) => {
+        const tok = l.nextToken();
+
+        expect(tok.type).toBe(expectedType);
+        expect(tok.literal).toBe(expectedLiteral);
+    })
+});
+
+test("Test number whoe invalid ./data/number/invalid1.json", async () => {
+    const input = await openFile('./test/data/number/invalid1.json');
+
+    const expected = [
+        { expectedType: tokenType.LBRACE, expectedLiteral: '{' },
+        { expectedType: tokenType.STRING, expectedLiteral: 'key1' },
+        { expectedType: tokenType.COLON, expectedLiteral: ':' },
+        { expectedType: tokenType.ILLEGAL, expectedLiteral: '00' },
+        { expectedType: tokenType.RBRACE, expectedLiteral: '}' },
+        { expectedType: tokenType.EOF, expectedLiteral: '' },
+    ];
+
+    const l = new Lexer(input);
+
+    expected.forEach(({ expectedType, expectedLiteral }) => {
+        const tok = l.nextToken();
+
+        expect(tok.type).toBe(expectedType);
+        expect(tok.literal).toBe(expectedLiteral);
+    })
+});
