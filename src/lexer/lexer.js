@@ -50,15 +50,21 @@ export class Lexer {
                 break;
             case 't':
             case 'f':
-                const result = this.#readBool();
+                const boolResult = this.#readBool();
 
-                if (result !== null) {
-                    return this.#newToken(tokenType.BOOLEAN, result);
+                if (boolResult !== null) {
+                    return this.#newToken(tokenType.BOOLEAN, boolResult);
                 }
             case 0:
                 token = this.#newToken(tokenType.EOF, '');
                 break;
             default:
+                if (this.#isNumber(this.ch)) {
+                    const num = this.#readNumber();
+                    token = this.#newToken(tokenType.NUMBER, num);
+                    return token;
+                }
+
                 token = this.#newToken(tokenType.ILLEGAL, this.ch);
                 break;
         }
@@ -118,8 +124,8 @@ export class Lexer {
 
 
     /** #readBool creates a boolean token
-     * @returns {string | null}
-     */
+    * @returns {string | null}
+    */
     #readBool() {
         if (this.ch === 't') {
             let i = 0;
@@ -148,5 +154,26 @@ export class Lexer {
         }
 
         return null;
+    }
+
+    /** #isNumber checks if the current token is a number
+     * @param {string} str current character token
+     *  @returns {boolean}
+     * */
+    #isNumber(str) {
+        return (str.charCodeAt() >= 48 && str.charCodeAt() <= 57) || str.charCodeAt() === 45 || str.charCodeAt() === 46;
+    }
+
+    /** #readNumber creates a number token
+      * @returns {string}
+      */
+    #readNumber() {
+        const pos = this.position;
+
+        while (this.#isNumber(this.ch)) {
+            this.#readChar()
+        }
+
+        return this.input.slice(pos, this.position)
     }
 }
