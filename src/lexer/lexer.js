@@ -122,26 +122,25 @@ export class Lexer {
         return result;
     }
 
-
     /** #readBool creates a boolean token
-    * @returns {string | null}
-    */
+     * @returns {string | null}
+     */
     #readBool() {
         if (this.ch === 't') {
             let i = 0;
-            const t = "true";
+            const t = 'true';
 
             while (this.ch === t[i] && i < t.length) {
                 i += 1;
-                this.#readChar()
+                this.#readChar();
             }
 
             if (t.length === i) {
-                return "true"
+                return 'true';
             }
         } else if (this.ch === 'f') {
             let i = 0;
-            const f = "false";
+            const f = 'false';
 
             while (this.ch == f[i] && i < f.length) {
                 i += 1;
@@ -149,7 +148,7 @@ export class Lexer {
             }
 
             if (f.length === i) {
-                return "false"
+                return 'false';
             }
         }
 
@@ -161,19 +160,23 @@ export class Lexer {
      *  @returns {boolean}
      * */
     #isNumber(str) {
-        return (str.charCodeAt() >= 48 && str.charCodeAt() <= 57) || str.charCodeAt() === 45 || str.charCodeAt() === 46;
+        return (
+            (str.charCodeAt() >= 48 && str.charCodeAt() <= 57) ||
+            str.charCodeAt() === 45 ||
+            str.charCodeAt() === 46
+        );
     }
 
     /** #readNumber creates a number token
-      * @returns {string}
-      */
+     * @returns {string}
+     */
     #readNumber() {
         const pos = this.position;
 
         while (this.#isNumber(this.ch)) {
-            this.#readChar()
+            this.#readChar();
         }
 
-        return this.input.slice(pos, this.position)
+        return this.input.slice(pos, this.position);
     }
 }
