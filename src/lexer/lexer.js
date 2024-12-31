@@ -91,6 +91,17 @@ export class Lexer {
         this.readPosition++;
     }
 
+    /** #peek looks one position ahead of the input but does not advance the lexer
+     * @returns {string | int}
+     */
+    peek() {
+        if (this.readPosition >= this.input.length) {
+            return 0;
+        }
+
+        return this.input[this.readPosition];
+    }
+
     /**
      * #newToken creates a new token type
      * @param {tokenType} tokenType
