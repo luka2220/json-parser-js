@@ -55,6 +55,12 @@ export class Lexer {
                 if (boolResult !== null) {
                     return this.#newToken(tokenType.BOOLEAN, boolResult);
                 }
+            case 'n':
+                const result = this.#readNull();
+
+                if (result !== null) {
+                    return this.#newToken(tokenType.NULL, result);
+                }
             case 0:
                 token = this.#newToken(tokenType.EOF, '');
                 break;
@@ -178,5 +184,24 @@ export class Lexer {
         }
 
         return this.input.slice(pos, this.position);
+    }
+
+    /** #readNull creates a null token
+     * @returns {string | null}
+     */
+    #readNull() {
+        const need = 'null';
+        let count = 0;
+
+        while (count < need.length) {
+            if (this.ch !== need[count]) {
+                break;
+            }
+
+            count++;
+            this.#readChar();
+        }
+
+        return count === need.length ? 'null' : null;
     }
 }

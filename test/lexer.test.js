@@ -291,4 +291,3 @@ test('test null data type ./data/null/valid.js', async () => {
         expect(tok.literal).toBe(expectedLiteral);
     });
 });
-
