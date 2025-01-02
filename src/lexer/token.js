@@ -31,7 +31,7 @@ export const tokenType = {
     LSQBRACKET: '[',
     RSQBRACKET: ']',
     // Data Types
-    STRING: '""',
+    STRING: 'STRING',
     BOOLEAN: 'BOOLEAN',
     NULL: 'NULL',
     NUMBER: 'NUMBER',
