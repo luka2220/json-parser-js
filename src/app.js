@@ -16,12 +16,12 @@ process.stdin.on("data", data => {
 
 	while (1) {
 		const token = l.nextToken();
-		console.log(`${token.type}: ${token.literal}`);
+		console.log(`{'${token.type}', '${token.literal}'}`);
 
 		if (token.type === "EOF") {
 			break;
 		}
 	}
 
-	console.log("\n");
+	console.log();
 });
