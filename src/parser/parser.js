@@ -11,7 +11,7 @@ export class Parser {
      * @param {string} input - JSON input 
      * @returns {object}
      * */
-    static jsonToObj(input) {
+    static parse(input) {
         const parser = new Parser();
         const tokens = parser.#createTokens(input);
 
